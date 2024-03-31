@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <script>
+        function clearForm() {
+            var inputs = document.querySelectorAll(".form-control");
+            inputs.forEach(function (input) {
+                input.value = '';
+            });
+
+            var resultDiv = document.querySelector(".res");
+            if (resultDiv) {
+                resultDiv.parentNode.removeChild(resultDiv);
+            }
+
+        }
+
+        // function predict(){
+        //     var inputs = document.querySelectorAll(".form-control");
+        //     if (inputs.length==0){
+        //         document.getElementById('p-res').innerHTML="Null";
+        //     }
+        // }
+    </script>
+
+</head>
+<style>
+    h1 {
+        color: rgb(255, 255, 255);
+        text-align: center;
+
+    }
+
+    body {
+        background-image: url('https://img.freepik.com/premium-photo/vector-style-illustration-beautiful-farm-landscape-with-tractors-harvesting-golden-crops_928211-407.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    }
+
+    .container {
+        margin-top: 50px;
+        width: 50%;
+        height: 80%;
+        background-color: rgba(88, 83, 83, 0.7);
+        padding: 15px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        /* display: flex; */
+        justify-content: space-around;
+        flex-direction: column;
+        margin: auto;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        color: white;
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .form-group input {
+        flex: 2;
+    }
+
+    .btn {
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 20px;
+        padding: 15px 20px;
+        color: white;
+        border-radius: 20px;
+        background-color: rgba(43, 17, 17, 0.626);
+
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    label {
+        font-weight: bold;
+        font-size: large;
+        align-self: center;
+    }
+
+    .clear {
+        width: 200px;
+    }
+
+    .getrec {
+        width: 200px;
+    }
+
+    .res {
+        color: white;
+        border: 1px white solid;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        padding: 2%;
+        /* flex-direction: column; */
+    }
+
+    .res-content {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    p {
+        font-size: 20px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    button:hover {
+        background-color: black;
+    }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 4px 0;
+    }
+
+    @media screen and (max-width:900px) {
+        .container {
+            /* background-color: aqua; */
+            width: 60%;
+            height: 60%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media screen and (max-width:600px) {
+        .container {
+            /* background-color: rgb(0, 255, 68); */
+            width: 80%;
+            padding: 7px;
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container" style="margin-top:30px; margin-bottom:5px;">
+        <h1>CROPPROPHET </h1>
+
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="Nitrogen">Nitrogen</label>
+                <input type="number" id="Nitrogen" name="Nitrogen" placeholder="Enter Nitrogen" class="form-control"
+                    required step="1">
+            </div>
+            <div class="form-group">
+                <label for="Phosporus">Phosphorus</label>
+                <input type="number" id="Phosporus" name="Phosporus" placeholder="Enter Phosphorus" class="form-control"
+                    required step="1">
+            </div>
+            <div class="form-group">
+                <label for="Potassium">Potassium</label>
+                <input type="number" id="Potassium" name="Potassium" placeholder="Enter Potassium" class="form-control"
+                    required step="1">
+            </div>
+
+            <div class="form-group">
+                <label for="Temperature">Temperature</label>
+                <input type="number" step="any" id="Temperature" name="Temperature"
+                    placeholder="Enter Temperature in °C" class="form-control" required step="0">
+            </div>
+            <div class="form-group">
+                <label for="Humidity">Humidity</label>
+                <input type="number" step="any" id="Humidity" name="Humidity" placeholder="Enter Humidity in %"
+                    class="form-control" required step="0">
+            </div>
+            <div class="form-group">
+                <label for="pH">pH</label>
+                <input type="number" id="Ph" name="Ph" placeholder="Enter pH value" class="form-control" required
+                    step="any">
+            </div>
+
+            <div class="form-group">
+                <label for="Rainfall">Rainfall</label>
+                <input type="number" step="any" id="Rainfall" name="Rainfall" placeholder="Enter Rainfall in mm"
+                    class="form-control" required>
+            </div>
+
+            <div class="btn">
+                <button type="submit" class="getrec">Get Recommendation</button>
+                <button type="clear" class="clear" onclick="clearForm()">Clear</button>
+            </div>
+
+        </form>
+
+
+
+        {% if result %}
+        <div id="result " class="res">
+            <div class="res-content">
+                <!-- <h4 style="justify-self: center; font-size:5px">Recommended Crop for cultivation is:</h4> -->
+                <p id="p-res" style="font: size 5px; ;">{{ result }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+
+    </div>
+
+
+    <div class="footer" style="background-color: black;">
+        <footer style="color:white">
+            Copyright @ 2024
+        </footer>
+    </div>
+
+
+</body>
+
+</html>
